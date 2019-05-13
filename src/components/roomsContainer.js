@@ -2,8 +2,7 @@ import React,{Component} from 'react';
 
 
 class RoomsContainer extends Component {
-	
-	
+
 	roomActivator = ()=>{
 		
 		this.props.handleClick();

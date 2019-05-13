@@ -29,12 +29,21 @@ class App extends Component {
 			this.setState({room2status: !this.state.room2status})
 			this.setState({ room2Data: { ...this.state.room2Data, adult: 1, children:0} })
 		} else if(stateName ==='room3status') {
-			this.setState({room3status: !this.state.room3status, room2status: !this.state.room2status})
+            if(this.state.room3status === true && this.state.room2status === true) {
+                this.setState({room3status: false, room2status: false})
+                } else {
+                this.setState({room3status: true,room2status: true})
+                }
+            
 			this.setState({ room3Data: { ...this.state.room3Data, adult: 1, children:0} })
 			this.setState({ room2Data: { ...this.state.room2Data, adult: 1, children:0} })
 		} else if(stateName ==='room4status') {
-			this.setState({room4status: !this.state.room4status, room3status: !this.state.room3status, room2status: !this.state.room2status})
-			this.setState({ room4Data: { ...this.state.room4Data, adult: 1, children:0} })
+                if(this.state.room2status === true && this.state.room3status === true && this.state.room4status === true) {
+                    this.setState({room4status: false, room3status: false, room2status: false})
+                } else {
+                this.setState({room4status: true,room3status: true, room2status: true })
+                }
+            this.setState({ room4Data: { ...this.state.room4Data, adult: 1, children:0} })
 			this.setState({ room3Data: { ...this.state.room3Data, adult: 1, children:0} })
 			this.setState({ room2Data: { ...this.state.room2Data, adult: 1, children:0} })
 		} 
@@ -75,21 +84,23 @@ class App extends Component {
 			
 				<div className="row">
 				<div className = "col-xs-3">
-					<RoomsContainer roomsLable = "Room 1" checkBox = "false" colorstyle ="white" handleChange = {this.handleSelectedBoxChange.bind(this,'room1Data')}  dropDownStatus = "true" />
+					<RoomsContainer roomsLable = "Room 1" checkBox = "false" colorstyle = "white" handleChange = {this.handleSelectedBoxChange.bind(this,'room1Data')}  dropDownStatus = "true" />
 				</div>
 				<div className = "col-xs-3">
-					<RoomsContainer roomsLable = "Room 2" checkBox = "true" colorstyle ="grey" handleChange = {this.handleSelectedBoxChange.bind(this,'room2Data')} handleClick = {this.handleCheckBoxClick.bind(this,'room2status' )} dropDownStatus = {this.state.room2status}/>
+					<RoomsContainer roomsLable = "Room 2" checkBox = "true" colorstyle = {this.state.room2status  ? 'white': 'grey'} handleChange = {this.handleSelectedBoxChange.bind(this,'room2Data')} handleClick = {this.handleCheckBoxClick.bind(this,'room2status' )} dropDownStatus = {this.state.room2status}/>
 				</div>
 				<div className = "col-xs-3">
-					<RoomsContainer roomsLable = "Room 3" checkBox = "true" colorstyle ="grey" handleChange = {this.handleSelectedBoxChange.bind(this,'room3Data')}  handleClick = {this.handleCheckBoxClick.bind(this, 'room3status')}  dropDownStatus = {this.state.room3status} />
+					<RoomsContainer roomsLable = "Room 3" checkBox = "true" colorstyle = {this.state.room3status  ? 'white': 'grey'} handleChange = {this.handleSelectedBoxChange.bind(this,'room3Data')}  handleClick = {this.handleCheckBoxClick.bind(this, 'room3status')}  dropDownStatus = {this.state.room3status} />
 				</div>
 				<div className = "col-xs-3">
-					<RoomsContainer roomsLable = "Room 4" checkBox = "true" colorstyle ="grey"  handleChange = {this.handleSelectedBoxChange.bind(this,'room4Data')}  handleClick = {this.handleCheckBoxClick.bind(this, 'room4status')} dropDownStatus = {this.state.room4status} />
+					<RoomsContainer roomsLable = "Room 4" checkBox = "true" colorstyle = {this.state.room4status  ? 'white': 'grey'}  handleChange = {this.handleSelectedBoxChange.bind(this,'room4Data')}  handleClick = {this.handleCheckBoxClick.bind(this, 'room4status')} dropDownStatus = {this.state.room4status} />
 				</div>
-				<div>
-				<button onClick={this.handleSubmit}>Submit </button>				
+				
+				</div>
+                <div>
+                
+				<button style = {{marginLeft:'20px',marginTop:'20px'}} onClick={this.handleSubmit}>Submit </button>				
 				</div>	
-				</div>
 			</ErrorBoundries>
 	
 		);
